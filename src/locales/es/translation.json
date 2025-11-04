@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "tech": "Tecnologías",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "header": {
+    "cv": "CV"
+  },
+  "alerts": {
+    "cv_missing": "CV no encontrado en public/. Coloca tu CV en public/ con el nombre CV_Antonio_Verdú_Salpico.pdf o actualiza el enlace.",
+    "form_send_success": "Mensaje enviado. Gracias — revisarás una notificación en el servicio configurado.",
+    "form_send_error": "Hubo un error al enviar el formulario. Intenta usar tu cliente de correo o revisa la configuración.",
+    "form_send_error_network": "Error al enviar el formulario. Intenta usar tu cliente de correo o revisa la configuración."
+  },
+  "hero": {
+    "hi": "Hola, soy",
+    "role": "Estudiante de Ingeniería y Sistemas de Datos",
+    "viewProjects": "Ver proyectos",
+    "downloadCV": "Descargar CV"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "paragraph": "Soy estudiante de <1>Ingeniería y Sistemas de Datos</1> con sangre extremeña, inquieta y conquistadora. Me apasiona crear proyectos desde cero, transformar ideas en algo real y aprender en cada paso del proceso. Tengo una gran curiosidad por el <3>cloud computing</3> y su relación con el <5>big data</5>, además de un interés creciente por la <7>inteligencia artificial</7> y el <9>machine learning</9>. Mi objetivo es <11>crear proyectos que ayuden a las personas</11> y, en el futuro, <13>emprender</13> para desarrollar mis propias ideas y empresas.",
+    "note": "Personaliza este párrafo con información de tu CV."
+  },
+  "intro": {
+    "paragraph": "Actualmente estudiando, apasionado por <1>diseñar y crear aplicaciones </1>útiles con atención al detalle. Me interesa el mundo del <3>cloud computing</3>, el <5>big data</5> y la <7>inteligencia artificial</7>. Soy muy pasional con lo que me gusta y me motiva construir proyectos que ayuden a los demás. Mi sueño es <9>emprender y desarrollar mis propias aplicaciones en el futuro</9>."
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Selección de mis proyectos más destacados.",
+    "viewDetails": "Ver detalles →",
+    "visit": "Visitar"
+  },
+  "project": {
+    "not_found": "Proyecto no encontrado",
+    "missing": "El proyecto solicitado no existe o ha sido movido.",
+    "development": "Desarrollo",
+    "view_on_github": "Ver en GitHub",
+    "github_missing": "GitHub: (añade link en src/data/projects.js)",
+    "visit_demo": "Visitar demo",
+    "back": "← Volver"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Interesado en colaborar o contactarme? Envíame un mensaje.",
+    "form_notice": "Actualmente el formulario no tiene un endpoint configurado. Al enviar se abrirá tu cliente de correo para enviar el mensaje a {{email}}.",
+    "form_config_note": "Si prefieres recibir mensajes directamente sin usar el cliente de correo, configura un endpoint (por ejemplo Formspree) poniendo la URL en {{file}}.",
+    "find_me": "También puedes encontrarme en:",
+    "name": "Nombre",
+    "email": "Email",
+    "message": "Mensaje",
+    "sending": "Enviando...",
+    "send": "Enviar",
+    "mailto_subject": "Contacto desde web — {{name}}"
+  },
+  "footer": {
+    "copyright": "© {{year}} Antonio Verdú Salpico. Todos los derechos reservados.",
+    "cv": "CV"
+  },
+  "skills": {
+    "title": "Habilidades"
+  },
+  "tech": {
+    "title": "Tecnologías",
+    "subtitle": "Herramientas y tecnologías que utilizo en mis proyectos."
+  },
+  "experience": {
+    "title": "Experiencia"
+  }
+}

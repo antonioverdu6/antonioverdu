@@ -14,6 +14,49 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+---
+
+## Portfolio project (Tailwind + Framer Motion)
+
+This repository was adapted to be a personal developer portfolio using Tailwind CSS and Framer Motion.
+
+To finish setup locally:
+
+1. Install the added dependencies:
+
+```
+npm install
+```
+
+2. Start the dev server:
+
+```
+npm start
+```
+
+Notes:
+- The project includes Tailwind config (`tailwind.config.js`) and PostCSS config. If you prefer, adjust colors and fonts in `tailwind.config.js`.
+- Update the placeholder content (name, description, projects, links, email) in files under `src/components/` and `src/data/projects.js`.
+- To deploy to Vercel, simply push to a Git repository and connect the repo in Vercel — no special config is required for Create React App deployments.
+
+### Añadir tu CV
+
+Coloca tu CV en formato PDF dentro de la carpeta `public/` para que esté disponible en producción. Por ejemplo:
+
+```
+public/CV_Antonio_Verdú_Salpico.pdf
+```
+
+Luego puedes enlazarlo desde el footer o alguna sección con `/CV_Antonio_Verdú_Salpico.pdf`.
+
+Ejemplo de enlace en HTML/JSX:
+
+```jsx
+<a href="/CV_Antonio_Verdú_Salpico.pdf" target="_blank" rel="noreferrer">Descargar CV</a>
+```
+
+
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
