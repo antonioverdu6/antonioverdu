@@ -2,8 +2,8 @@
 // Fields: title, description, image, link
 const projects = [
   {
-    title: 'ListenList',
-    title_en: 'ListenList',
+    title: 'Waves',
+    title_en: 'Waves',
     description: 'Desarrollo de una aplicación web para valorar y comentar música, con autenticación de usuarios y perfiles personalizados.',
     description_en: 'Web application to rate and review music, with user authentication and personalized profiles.',
   // Use the attached image placed in public/images/listenlist.png
@@ -17,7 +17,7 @@ const projects = [
     github: 'https://github.com/antonioverdu6/ListenList',
     // 'details' is a longer development description; edit with in-depth notes about design, arquitectura, retos, soluciones, etc.
     details: `
-        ListenList es una aplicación web social centrada en la música, desarrollada con **Django (API backend)** y **React (frontend)**. 
+        Waves es una aplicación web social centrada en la música, desarrollada con **Django (API backend)** y **React (frontend)**. 
         Su objetivo es permitir a los usuarios buscar canciones, valorar y reseñar temas o álbumes utilizando el catálogo en tiempo real de **Spotify**.
 
         A nivel técnico, la app utiliza la **Spotify Web API** mediante la librería spotipy, lo que evita almacenar todo el catálogo musical localmente. 
@@ -39,7 +39,7 @@ const projects = [
         `
   ,
   details_en: `
-    ListenList is a social web application focused on music, built with **Django (API backend)** and **React (frontend)**.
+    Waves is a social web application focused on music, built with **Django (API backend)** and **React (frontend)**.
     It allows users to search tracks, rate and review songs or albums using the live catalog provided by **Spotify**.
 
     Technically, the app consumes the **Spotify Web API** (via a lightweight library) so the full catalog isn't stored locally.

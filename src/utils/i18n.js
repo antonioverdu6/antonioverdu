@@ -24,7 +24,7 @@ const TRANSLATIONS = {
     'El proyecto solicitado no existe o ha sido movido.': "The requested project doesn't exist or has been moved.",
     'Selección de mis proyectos más destacados.': 'A selection of my most notable projects.',
     'Hola, soy': 'Hi, I am',
-    'Estudiante de Ingeniería y Sistemas de Datos': 'Student in Systems and Data Engineering',
+    'Graduado en Ingeniería y Sistemas de Datos': 'Graduate in Systems and Data Engineering',
     'GitHub: (añade link en src/data/projects.js)': 'GitHub: (add link in src/data/projects.js)'
   }
 };

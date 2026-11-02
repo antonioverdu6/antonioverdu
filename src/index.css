@@ -2,89 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global styles and variables for the dark, modern look */
-:root{
-  --bg: #0b0f14; /* main background - change for different darkness */
-  --panel: #0f1720; /* slightly lighter panels */
-  --accent: #00e5ff; /* neon blue accent - change to --accent-green if desired */
+:root {
+  --airflow-bg: #0a0e17;
+  --airflow-canvas: #0d121f;
+  --airflow-panel: #141c2e;
+  --airflow-border: #22304a;
+  --airflow-teal: #00c7b7;
+  --airflow-blue: #017cee;
+  --airflow-success: #00c07f;
+  --airflow-running: #017cee;
+  --airflow-warning: #f59e0b;
+  --airflow-failed: #ef4444;
 }
 
-html,body,#root{
-  height:100%;
+html, body, #root {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--airflow-bg);
+  color: #e2e8f0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Ensure sections scroll into view below the fixed header */
-section{
-  scroll-margin-top: 4rem; /* adjust if header height changes */
+/* Airflow canvas background with subtle grid coordinate dots */
+.airflow-grid-canvas {
+  background-color: #0a0e17;
+  background-image: radial-gradient(circle, #1f2c42 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-html{
-  scroll-behavior: smooth; /* smooth scrolling for anchor links */
+/* Custom Airflow thin scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-body{
-  @apply bg-[var(--bg)] text-gray-200 font-sans antialiased;
+::-webkit-scrollbar-track {
+  background: #0a0e17;
 }
 
-/* Utility tweaks */
-.glass {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(6px);
+::-webkit-scrollbar-thumb {
+  background: #22304a;
+  border-radius: 3px;
 }
 
-/* Focus-visible for accessibility */
-*:focus-visible{
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+::-webkit-scrollbar-thumb:hover {
+  background: #334769;
 }
 
-/* Simple container */
-.container-max{
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* Prominent horizontal scrollbar for pipeline DAG canvas */
+.pipeline-scroll-container {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
 }
 
-/* Starry background layer: fixed so only content scrolls above it */
-.stars {
-  position: fixed;
-  inset: 0;
-  z-index: 0; /* behind main content */
-  pointer-events: none;
-  background-color: var(--bg);
-  overflow: hidden;
+.pipeline-scroll-container::-webkit-scrollbar {
+  height: 10px;
 }
 
-/* Individual star element */
-.stars .star{
-  position: absolute;
-  border-radius: 50%;
-  background: white;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 6px rgba(255,255,255,0.08), 0 0 12px rgba(255,255,255,0.03);
-  opacity: 0.9;
-  will-change: opacity, transform;
-  animation-name: twinkle;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+.pipeline-scroll-container::-webkit-scrollbar-track {
+  background: #080c14;
+  border-radius: 6px;
+  border: 1px solid #1a2436;
 }
 
-@keyframes twinkle{
-  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
-  100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+.pipeline-scroll-container::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
 }
 
-/* Subtle layered glow for depth (optional) */
-.stars .star.glow{
-  filter: blur(1px);
+.pipeline-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #00c7b7;
+  border-color: #00c7b7;
 }
 
-/* Ensure main content sits above the stars */
-.site-content{
-  position: relative;
-  z-index: 10;
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
+/* Pulse animation for Airflow running state */
+@keyframes airflow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(1, 124, 238, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(1, 124, 238, 0);
+  }
+}
+
+.airflow-running-pulse {
+  animation: airflow-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Symmetrical Airflow task card styles */
+.airflow-task-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #22304a;
+  background-color: #141c2e;
+}
+
+.airflow-task-card:hover {
+  border-color: #00c7b7;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.5);
+}
+
+.airflow-task-card.selected {
+  border-color: #017cee;
+  box-shadow: 0 0 0 2px rgba(1, 124, 238, 0.3);
+}
+
+/* Status border strips */
+.status-border-success {
+  border-left: 4px solid #00c07f !important;
+}
+
+.status-border-running {
+  border-left: 4px solid #017cee !important;
+}
+
+.status-border-warning {
+  border-left: 4px solid #f59e0b !important;
+}
+
+.status-border-queued {
+  border-left: 4px solid #64748b !important;
+}

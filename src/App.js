@@ -1,90 +1,105 @@
 import React, { useState, useEffect } from 'react';
-import './index.css';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
-import TechCloud from './components/TechCloud';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import ProjectPage from './pages/ProjectPage';
+import i18n from 'i18next';
+import AirflowNavbar from './components/AirflowNavbar';
+import AirflowDagHeader from './components/AirflowDagHeader';
+import AirflowGraphView from './components/AirflowGraphView';
+import AirflowGridView from './components/AirflowGridView';
+import AirflowCapabilitiesView from './components/AirflowCapabilitiesView';
+import AirflowProjectsView from './components/AirflowProjectsView';
+import AirflowCodeView from './components/AirflowCodeView';
+import AirflowLogsView from './components/AirflowLogsView';
+import TaskInstanceModal from './components/TaskInstanceModal';
+import AirflowTriggerModal from './components/AirflowTriggerModal';
+import AirflowFooter from './components/AirflowFooter';
+import './index.css';
 
-function App() {
-  const [stars, setStars] = useState([]);
+function MainAirflowDashboard() {
+  const [activeTab, setActiveTab] = useState('graph'); // 'graph' | 'grid' | 'capabilities' | 'projects' | 'code' | 'logs'
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isTriggerOpen, setIsTriggerOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState(() => localStorage.getItem('lang') || i18n.language || 'es');
 
   useEffect(() => {
-    // generate random stars with varied sizes, twinkle durations and delays
-    const count = 120; // number of stars
-    const arr = Array.from({ length: count }).map(() => {
-      const size = Math.round(Math.random() * 3) + 1; // 1-4 px
-      return {
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size,
-        duration: (Math.random() * 3) + 2, // 2s - 5s
-        delay: Math.random() * 5, // 0s - 5s
-        opacity: 0.5 + Math.random() * 0.6,
-        glow: Math.random() > 0.85, // some stars have extra glow
-        glowSize: 2 + Math.random() * 6,
-        color: Math.random() > 0.96 ? 'rgba(0,229,255,0.9)' : 'rgba(255,255,255,0.9)'
-      };
-    });
-    setStars(arr);
+    const handleLangChange = (lng) => {
+      setCurrentLang(lng);
+    };
+    i18n.on('languageChanged', handleLangChange);
+    return () => {
+      i18n.off('languageChanged', handleLangChange);
+    };
   }, []);
+
   return (
-    <HashRouter>
-      <div className="min-h-screen flex flex-col text-gray-100">
-        {/* Starry background layer (fixed). It remains static while content scrolls above. */}
-        <div className="stars" aria-hidden="true">
-          {/* Stars are generated dynamically in state and rendered here */}
-          {stars.map((s, i) => (
-            <span
-              key={i}
-              className={`star ${s.glow ? 'glow' : ''}`}
-              style={{
-                left: `${s.x}%`,
-                top: `${s.y}%`,
-                width: `${s.size}px`,
-                height: `${s.size}px`,
-                animationDuration: `${s.duration}s`,
-                animationDelay: `${s.delay}s`,
-                opacity: s.opacity,
-                boxShadow: `0 0 ${s.glowSize}px ${s.color}`
-              }}
-            />
-          ))}
-        </div>
+    <div key={currentLang} className="min-h-screen bg-[#0a0e17] text-gray-100 flex flex-col font-sans w-full overflow-x-hidden">
+      
+      {/* 1. Global Airflow Navbar */}
+      <AirflowNavbar 
+        onOpenTrigger={() => setIsTriggerOpen(true)}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        currentLang={currentLang}
+      />
 
-        <Header />
+      {/* 2. Airflow DAG Header & Sub-navigation Tabs */}
+      <AirflowDagHeader 
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onOpenTrigger={() => setIsTriggerOpen(true)}
+        currentLang={currentLang}
+      />
 
-        <main className="flex-1 pt-16 site-content"> {/* pt-16 accounts for fixed header height */}
-          <Routes>
-            <Route path="/projects/:id" element={<ProjectPage />} />
-            <Route path="/" element={
-              <>
-                <Hero />
-                <div className="container-max mx-auto">
-                  <About />
-                  <TechCloud />
-                  <Skills />
-                  <Experience />
-                  <Projects />
-                  <Contact />
-                </div>
-              </>
-            } />
-          </Routes>
-        </main>
+      {/* 3. Main Dashboard Workspace Canvas */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6 min-w-0 overflow-x-hidden">
+        {activeTab === 'graph' && (
+          <AirflowGraphView onSelectTask={setSelectedTask} currentLang={currentLang} />
+        )}
+        {activeTab === 'grid' && (
+          <AirflowGridView onSelectTask={setSelectedTask} setActiveTab={setActiveTab} currentLang={currentLang} />
+        )}
+        {activeTab === 'capabilities' && (
+          <AirflowCapabilitiesView currentLang={currentLang} />
+        )}
+        {activeTab === 'projects' && (
+          <AirflowProjectsView onSelectTask={setSelectedTask} currentLang={currentLang} />
+        )}
+        {activeTab === 'code' && (
+          <AirflowCodeView currentLang={currentLang} />
+        )}
+        {activeTab === 'logs' && (
+          <AirflowLogsView currentLang={currentLang} />
+        )}
+      </main>
 
-        <div className="container-max mx-auto">
-          <Footer />
-        </div>
-      </div>
-    </HashRouter>
+      {/* 4. Task Instance Inspector Modal */}
+      {selectedTask && (
+        <TaskInstanceModal 
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
+          currentLang={currentLang}
+        />
+      )}
+
+      {/* 5. Trigger DAG (Contact) Modal */}
+      <AirflowTriggerModal 
+        isOpen={isTriggerOpen}
+        onClose={() => setIsTriggerOpen(false)}
+        currentLang={currentLang}
+      />
+
+      {/* 6. Airflow System Footer */}
+      <AirflowFooter onOpenTrigger={() => setIsTriggerOpen(true)} currentLang={currentLang} />
+      
+    </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/*" element={<MainAirflowDashboard />} />
+      </Routes>
+    </HashRouter>
+  );
+}
